@@ -3,8 +3,8 @@ using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load .env file
-DotNetEnv.Env.Load();
+// Load .env file - TraversePath helps find the .env file in parent directories
+DotNetEnv.Env.TraversePath().Load();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -15,6 +15,12 @@ builder.Services.AddControllers();
 if (builder.Environment.EnvironmentName != "Testing")
 {
     var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+    
+    if (string.IsNullOrEmpty(connectionString))
+    {
+        throw new InvalidOperationException("A variável de ambiente 'DB_CONNECTION_STRING' não foi encontrada. Verifique o arquivo .env.");
+    }
+    
     builder.Services.AddDbContext<TrocaDeFigurinhas.Data.AppDbContext>(options =>
         options.UseNpgsql(connectionString));
 }
@@ -38,6 +44,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("/", () => "API Rodando");
 
 app.MapControllers();
 

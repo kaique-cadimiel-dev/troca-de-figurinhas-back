@@ -1,0 +1,15 @@
+{
+  "workspace": {
+    "id": "44b56fed-fb36-49c6-ac87-a53a6d8912e1"
+  },
+  "entities": {
+    "environments": [],
+    "flows": [],
+    "globals": [],
+    "mocks": [],
+    "specs": [],
+    "collections": [
+      "../TrocaDeFigurinhas.postman_collection.json"
+    ]
+  }
+}
