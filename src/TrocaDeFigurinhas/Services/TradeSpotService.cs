@@ -15,6 +15,11 @@ public class TradeSpotService : ITradeSpotService
 
     public async Task<TradeSpot> CreateTradeSpotAsync(TradeSpot spot)
     {
+        if (string.IsNullOrWhiteSpace(spot.Name))
+        {
+            throw new ArgumentException("Name cannot be empty");
+        }
+
         spot.Id = Guid.NewGuid();
         spot.CreatedAt = DateTime.UtcNow;
         spot.Status = TradeSpotStatus.Active;
