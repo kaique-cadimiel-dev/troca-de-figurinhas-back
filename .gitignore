@@ -1,0 +1,45 @@
+# === CONFIGURAÇÕES E SEGURANÇA ===
+# Bloqueia arquivos de variáveis de ambiente (onde ficam suas senhas e chaves)
+.env
+.env.local
+.env.development
+.env.production
+*.env
+
+# === .NET (Pastas de Compilação) ===
+# Bloqueia as pastas onde o .NET compila o código localmente
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# === VS CODE (Configurações do Editor) ===
+# Bloqueia configurações locais do seu VS Code, mas mantém os arquivos de build/debug se necessário
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+*.code-workspace
+
+# === MACOS (Arquivos do Sistema) ===
+# Bloqueia arquivos ocultos que o macOS cria automaticamente nas pastas
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.Trashes
+.VolumeIcon.icens
+.com.apple.timemachine.donotpresent
+
+# === USER SECRETS E LOGS ===
+# Ferramenta de segredos nativa do .NET e arquivos de log
+secrets.json
+*.log
