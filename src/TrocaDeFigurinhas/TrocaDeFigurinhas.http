@@ -1,0 +1,6 @@
+@TrocaDeFigurinhas_HostAddress = http://localhost:5098
+
+GET {{TrocaDeFigurinhas_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
