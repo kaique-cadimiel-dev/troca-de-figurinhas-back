@@ -12,9 +12,12 @@ builder.Services.AddOpenApi();
 builder.Services.AddControllers();
 
 // Database Configuration
-var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-builder.Services.AddDbContext<TrocaDeFigurinhas.Data.AppDbContext>(options =>
-    options.UseNpgsql(connectionString));
+if (builder.Environment.EnvironmentName != "Testing")
+{
+    var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+    builder.Services.AddDbContext<TrocaDeFigurinhas.Data.AppDbContext>(options =>
+        options.UseNpgsql(connectionString));
+}
 
 // Register Repositories
 builder.Services.AddScoped<TrocaDeFigurinhas.Interfaces.IUserRepository, TrocaDeFigurinhas.Repositories.UserRepository>();
