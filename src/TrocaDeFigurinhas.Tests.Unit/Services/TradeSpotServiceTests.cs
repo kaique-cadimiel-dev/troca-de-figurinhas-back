@@ -36,4 +36,20 @@ public class TradeSpotServiceTests
         result.Status.Should().Be(TradeSpotStatus.Active);
         _tradeSpotRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<TradeSpot>()), Times.Once);
     }
+
+    [Fact]
+    public async Task CreateTradeSpotAsync_ShouldThrowException_WhenNameIsEmpty()
+    {
+        // Arrange
+        var spot = new TradeSpot
+        {
+            Name = "",
+            Address = "Address 123"
+        };
+
+        // Act & Assert
+        await _tradeSpotService.Invoking(s => s.CreateTradeSpotAsync(spot))
+            .Should().ThrowAsync<ArgumentException>()
+            .WithMessage("Name cannot be empty");
+    }
 }
