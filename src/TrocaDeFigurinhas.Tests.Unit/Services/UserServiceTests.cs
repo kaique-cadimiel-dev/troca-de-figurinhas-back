@@ -9,12 +9,14 @@ namespace TrocaDeFigurinhas.Tests.Unit.Services;
 public class UserServiceTests
 {
     private readonly Mock<IUserRepository> _userRepositoryMock;
+    private readonly Mock<IAuthService> _authServiceMock;
     private readonly UserService _userService;
 
     public UserServiceTests()
     {
         _userRepositoryMock = new Mock<IUserRepository>();
-        _userService = new UserService(_userRepositoryMock.Object);
+        _authServiceMock = new Mock<IAuthService>();
+        _userService = new UserService(_userRepositoryMock.Object, _authServiceMock.Object);
     }
 
     [Fact]
@@ -30,6 +32,9 @@ public class UserServiceTests
 
         _userRepositoryMock.Setup(repo => repo.GetByEmailAsync(user.Email))
             .ReturnsAsync((User?)null);
+        
+        _authServiceMock.Setup(auth => auth.HashPassword(It.IsAny<string>()))
+            .Returns("hashed_password");
 
         // Act
         var result = await _userService.CreateUserAsync(user);
