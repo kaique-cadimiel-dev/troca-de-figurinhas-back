@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TrocaDeFigurinhas\TrocaDeFIgurinhas.csproj" />
+    <ProjectReference Include="..\TrocaDeFigurinhas\TrocaDeFigurinhas.csproj" />
   </ItemGroup>
 
 </Project>
